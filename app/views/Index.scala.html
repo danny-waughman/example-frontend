@@ -1,9 +1,42 @@
 @import views.html.GovUkWrapper
+@import uk.gov.hmrc.play.views.formatting.Dates
+@import uk.gov.hmrc.play.views.formatting.Money
 
 @this(template: GovUkWrapper)
 
-@()(implicit messages: Messages)
+@(payments: List[Payment])(implicit messages: Messages)
 
 @template(title = messages("index.title")) {
     <h1>@messages("index.pageHeading")</h1>
+
+    <div class="grid-row">
+        <div class="column-one-third form-hint">
+        @messages("index.date")
+        </div>
+
+        <div class="column-one-third form-hint">
+        @messages("index.description")
+        </div>
+
+        <div class="column-one-third r-align form-hint">
+        @messages("index.amount")
+        </div>
+    </div>
+
+    @payments.map { payment =>
+        <div class="grid-row">
+            <div class="column-one-third">
+                @Dates.formatDate(payment.date)
+            </div>
+
+            <div class="column-one-third">
+            @payment.reference
+            </div>
+
+            <div class="column-one-third r-align">
+            @Money.pounds(payment.amount)
+            </div>
+        </div>
+    }
 }
+
