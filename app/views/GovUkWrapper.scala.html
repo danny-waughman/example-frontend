@@ -1,0 +1,40 @@
+@import views.html.layouts.GovUkTemplate
+@import uk.gov.hmrc.play.views.html.layouts._
+@import play.twirl.api.HtmlFormat
+
+@this(govUkTemplate: GovUkTemplate,
+        head: Head,
+        headerNav: HeaderNav,
+        mainContent: MainContent,
+        footerLinks: FooterLinks,
+        article: Article)
+
+@(title: String)(mainBodyContent: Html)(implicit messages: Messages)
+
+@headContent = {
+@head(linkElem = None, headScripts = None)
+}
+
+@insideHeader = {
+@headerNav(navTitle = None, navTitleLink = None, showBetaLink = false, navLinks = None)
+}
+
+@footerLinksContent = {
+@footerLinks(
+    additionalLinks = None,
+    euExitLinks = None,
+    accessibilityFooterUrl = None
+)
+}
+
+@content = {
+@mainContent(article(mainBodyContent))
+}
+
+@govUkTemplate(title = Some(title), bodyClasses = None)(headContent,
+    HtmlFormat.empty,
+    insideHeader,
+    HtmlFormat.empty,
+    HtmlFormat.empty,
+    Some(footerLinksContent),
+    true)(content)

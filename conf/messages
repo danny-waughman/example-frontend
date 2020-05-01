@@ -1,1 +1,2 @@
-# https://www.playframework.com/documentation/latest/ScalaI18N
+index.title = This is the nav title
+index.pageHeading = This is the page heading
